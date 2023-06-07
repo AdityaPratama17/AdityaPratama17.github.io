@@ -15,52 +15,55 @@
   </style>
 </head>
 <body>
-  <div class="row mt-3">
-    <div class="col-md-7 mx-auto">
-      <div class="card" style="background-color: rgb(66, 66, 66);color: azure;">
-        <div class="card-body">
-          <h1>Testing Geolocation</h1>
-          <hr>
-          <button type="button" class="btn btn-light" onclick="get_location(show_warning = true)">Get Location</button>
+  
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-8 mx-auto">
+        <div class="card shadow " style="background-color: rgb(66, 66, 66);color: azure;">
+          <div class="card-body">
+            <h1>Testing Geolocation</h1>
+            <hr>
+            <button type="button" class="btn btn-light" onclick="get_location(show_warning = true)">Get Location</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="row mt-3">
-    <div class="col-md-7 mx-auto">
-      <div class="card" style="background-color: rgb(66, 66, 66);color: azure;">
-        <div class="card-body">
-          <h4>Location Informations</h4>
-          <hr>
-          <table class="table table-dark">
-            <thead>
-              <tr>
-                <th scope="col">Property</th>
-                <th scope="col">Value</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Latitude & Longitude</td>
-                <td id="lat_long"></td>
-              </tr>
-              <tr>
-                <td>Maps</td>
-                <td><a id="maps" href="">Lihat lokasi</a></td>
-              </tr>
-              <tr>
-                <td>Location Accuracy</td>
-                <td id="accuracy"></td>
-              </tr>
-              <tr>
-                <td>Error</td>
-                <td id="error"></td>
-              </tr>
-            </tbody>
-          </table>
-
-          <div id="map"></div>
+    <div class="row mt-3">
+      <div class="col-md-8 mx-auto">
+        <div class="card shadow " style="background-color: rgb(66, 66, 66);color: azure;">
+          <div class="card-body">
+            <h4>Location Informations</h4>
+            <hr>
+            <table class="table table-dark">
+              <thead>
+                <tr>
+                  <th scope="col">Property</th>
+                  <th scope="col">Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Latitude & Longitude</td>
+                  <td id="lat_long"></td>
+                </tr>
+                <tr>
+                  <td>Maps</td>
+                  <td><a id="maps" href="">Lihat lokasi</a></td>
+                </tr>
+                <tr>
+                  <td>Location Accuracy</td>
+                  <td id="accuracy"></td>
+                </tr>
+                <tr>
+                  <td>Error</td>
+                  <td id="error"></td>
+                </tr>
+              </tbody>
+            </table>
+  
+            <div id="map"></div>
+          </div>
         </div>
       </div>
     </div>
