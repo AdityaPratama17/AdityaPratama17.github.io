@@ -62,6 +62,7 @@
                 </tr>
               </tbody>
             </table>
+            <p class="text-muted">[update: 07/06/2023-20:00]</p>
           </div>
         </div>
       </div>
@@ -74,14 +75,12 @@
   <script>
     var latitude, longitude, location_accuracy = null
     var container = document.getElementById("error");
-    var timeout = document.getElementById("timeout").value
 
     function get_location(show_warning = true) {
       document.getElementById("lat_long").textContent = ''
       document.getElementById("accuracy").textContent = ' '
       document.getElementById("maps").href = ' '
       container.textContent = ' '
-      timeout = document.getElementById("timeout").value
       
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
@@ -131,7 +130,6 @@
     const navigatorGeolocationOption = {
       enableHighAccuracy: true,
       maximumAge: 0,
-      // timeout: timeout,
       timeout: 5000,
     }
 
