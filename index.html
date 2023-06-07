@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+  <style>
+    body {
+      background-color: rgb(66, 66, 66); 
+      color: azure;
+    }
+  </style>
+</head>
+<body>
+  <div class="row mt-3">
+    <div class="col-md-7 mx-auto">
+      <div class="card" style="background-color: rgb(66, 66, 66);color: azure;">
+        <div class="card-body">
+          <h1>Testing Geolocation</h1>
+          <hr>
+          <button type="button" class="btn btn-light" onclick="get_location(show_warning = true)">Get Location</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-md-7 mx-auto">
+      <div class="card" style="background-color: rgb(66, 66, 66);color: azure;">
+        <div class="card-body">
+          <h4>Location Informations</h4>
+          <hr>
+          <table class="table table-dark">
+            <thead>
+              <tr>
+                <th scope="col">Property</th>
+                <th scope="col">Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Latitude & Longitude</td>
+                <td id="lat_long"></td>
+              </tr>
+              <tr>
+                <td>Maps</td>
+                <td><a id="maps" href="">Lihat lokasi</a></td>
+              </tr>
+              <tr>
+                <td>Location Accuracy</td>
+                <td id="accuracy"></td>
+              </tr>
+              <tr>
+                <td>Error</td>
+                <td id="error"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div id="map"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  <!-- LOCATION SCRIPT -->
+  <script>
+    var latitude, longitude, location_accuracy = null
+    var container = document.getElementById("error");
+
+    function get_location(show_warning = true) {
+      document.getElementById("lat_long").textContent = ''
+      document.getElementById("accuracy").textContent = ' '
+      document.getElementById("maps").href = ' '
+      container.textContent = ' '
+      
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => successCallback(position, show_warning),
+          (error) => errorCallback(error, show_warning),
+          navigatorGeolocationOption);
+      } else {
+        container.innerHTML += "<p>Sorry, your browser does not support HTML5 geolocation.</p>";
+      }
+    };
+
+    function successCallback(position, show_warning) {
+      location_accuracy = position.coords.accuracy
+      latitude = position.coords.latitude
+      longitude = position.coords.longitude
+      console.log(`${location_accuracy} https://www.google.com/maps?q=${latitude},${longitude}`);
+
+      document.getElementById("lat_long").textContent = `${latitude},${longitude}`
+      document.getElementById("accuracy").textContent = location_accuracy
+      document.getElementById("maps").href = `https://www.google.com/maps?q=${latitude},${longitude}`
+
+      if (location_accuracy > 80 & show_warning) {
+        container.innerHTML += "<p>Akurasi lokasi tidak akurat</p>";
+      }
+    }
+
+    function errorCallback(error) {
+      let err_msg
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          err_msg = "PERMISSION_DENIED - Aktifkan GPS untuk mendapatkan lokasi anda."
+          break;
+        case error.POSITION_UNAVAILABLE:
+          err_msg = "POSITION_UNAVAILABLE - Location information is unavailable."
+          break;
+        case error.TIMEOUT:
+          err_msg = "TIMEOUT - The request to get user location timed out."
+          break;
+        case error.UNKNOWN_ERROR:
+          err_msg = "UNKNOWN_ERROR - An unknown error occurred."
+          break;
+      }
+      console.log(err_msg)
+      container.innerHTML += `<p>${err_msg}</p>`;
+    }
+
+    const navigatorGeolocationOption = {
+      enableHighAccuracy: true,
+      maximumAge: 0,
+      timeout: 1000,
+    }
+
+  </script>
+</body>
+</html>
