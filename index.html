@@ -23,6 +23,7 @@
           <div class="card-body">
             <h1>Testing Geolocation</h1>
             <hr>
+            <!-- <input type="number" class="form-control" id="timeout" value="1000"> -->
             <button type="button" class="btn btn-light" onclick="get_location(show_warning = true)">Get Location</button>
           </div>
         </div>
@@ -61,8 +62,6 @@
                 </tr>
               </tbody>
             </table>
-  
-            <div id="map"></div>
           </div>
         </div>
       </div>
@@ -75,14 +74,15 @@
   <script>
     var latitude, longitude, location_accuracy = null
     var container = document.getElementById("error");
+    var timeout = document.getElementById("timeout").value
 
     function get_location(show_warning = true) {
       document.getElementById("lat_long").textContent = ''
       document.getElementById("accuracy").textContent = ' '
       document.getElementById("maps").href = ' '
       container.textContent = ' '
+      timeout = document.getElementById("timeout").value
       
-
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (position) => successCallback(position, show_warning),
@@ -131,7 +131,8 @@
     const navigatorGeolocationOption = {
       enableHighAccuracy: true,
       maximumAge: 0,
-      timeout: 1000,
+      // timeout: timeout,
+      timeout: 5000,
     }
 
   </script>
