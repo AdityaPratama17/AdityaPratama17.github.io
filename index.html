@@ -22,10 +22,10 @@
         <div class="card shadow " style="background-color: rgb(66, 66, 66);color: azure;">
           <div class="card-body">
             <h1>Testing Geolocation</h1>
-            <p style="font-size: 10pt;">[update: 07062023.2021]</p>
+            <p style="font-size: 10pt;">[update: 07062023.2032]</p>
             <hr>
             <!-- <input type="number" class="form-control" id="timeout" value="1000"> -->
-            <button type="button" class="btn btn-light" onclick="get_location(show_warning = true)">Get Location</button>
+            <button id="location_btn" type="button" class="btn btn-light" onclick="get_location(show_warning = true)">Get Location</button>
           </div>
         </div>
       </div>
@@ -83,6 +83,9 @@
       document.getElementById("accuracy").textContent = ' '
       document.getElementById("maps").href = ' '
       container.textContent = ' '
+      document.getElementById("location_btn").textContent = 'Getting location...'
+      document.getElementById("location_btn").disabled = true
+      
       
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
@@ -107,6 +110,9 @@
       if (location_accuracy > 80 & show_warning) {
         container.innerHTML += "<p>Akurasi lokasi tidak akurat</p>";
       }
+
+      document.getElementById("location_btn").disabled = false
+      document.getElementById("location_btn").textContent = 'Get Location'
     }
 
     function errorCallback(error) {
@@ -127,6 +133,8 @@
       }
       console.log(err_msg)
       container.innerHTML += `<p>${err_msg}</p>`;
+      document.getElementById("location_btn").disabled = false
+      document.getElementById("location_btn").textContent = 'Get Location'
     }
 
     const navigatorGeolocationOption = {
